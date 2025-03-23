@@ -1,21 +1,15 @@
-import { buttonVariants } from "@/components/ui/button";
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-function App() {
+export default function App() {
+  const { address, isConnected } = useAccount();
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen space-y-20">
-      <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">
-        Vite, React, Shadcn-ui minimal starter
-      </h1>
-      <a
-        href="https://github.com/moinulmoin/vite-react-tailwind-starter"
-        target="_blank"
-        rel="noreferrer"
-        className={buttonVariants()}
-      >
-        ⭐️ on GitHub
-      </a>
-    </main>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+      <ConnectButton />
+      {isConnected && (
+        <p className="mt-4">Connected Wallet: {address}</p>
+      )}
+    </div>
   );
 }
-
-export default App;
